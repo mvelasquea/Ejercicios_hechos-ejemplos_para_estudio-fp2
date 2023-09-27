@@ -39,7 +39,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\itemEmail}{mvelasquea@unsa.edu.pe}
 \newcommand{\itemStudent}{Mikhail Gabino Velasque Arcos}
-\newcommand{\itemCourse}{Laboratorio FUNDAMENTOS DE LA PROGRAMACION}
+\newcommand{\itemCourse}{Laboratorio FUNDAMENTOS DE LA PROGRAMACION II}
 \newcommand{\itemCourseCode}{20214260}
 \newcommand{\itemSemester}{II}
 \newcommand{\itemUniversity}{Universidad Nacional de San Agustín de Arequipa}
@@ -158,7 +158,7 @@
 		\end{tabular}
 	\end{table}
 	
-	\section{Actividad }
+	\section{Actividades}
 	\begin{itemize}		
 		\item Cree un Proyecto llamado Laboratorio3
 Usted deberá agregar las clases Nave.java y DemoBatalla.java.
@@ -185,6 +185,12 @@ Analice, complete y pruebe el Código de la clase DemoBatalla
 	
 	\begin{lstlisting}[language=bash,caption={Creando la clase Nave}][H]
 			public class Nave {
+			/*
+	 laboratorio Nro 3 ejercicio 1
+	 Autor :Mikhail Gabino Velasque Arcos
+	colaboro:---
+	tiempo:
+	 */
 			private String nombre;
 			private int fila;
 			private String columna;
@@ -226,7 +232,14 @@ Analice, complete y pruebe el Código de la clase DemoBatalla
 	\end{lstlisting}	
 	\begin{lstlisting}[language=bash,caption={Creando la clase principal de DemoBatalla.java}][H]
 	public class DemoBatalla {
+	
 	public static void main(String [] args){
+/*
+	 laboratorio Nro 3 ejercicio 1
+	 Autor :Mikhail Gabino Velasque Arcos
+	colaboro:---
+	tiempo:
+	 */	
 		Nave [] misNaves = new Nave[10];
 		Scanner sc = new Scanner(System.in);
 		String nomb, col;
@@ -326,7 +339,157 @@ Analice, complete y pruebe el Código de la clase DemoBatalla
 			    return naveMayor;
 			}
 		}
+		
+	\end{lstlisting}
+\subsection{EJERCICIO 02 (Uso de arreglos de objetos en el ejercicio 4 del lab 01)}
+	\begin{itemize}	
+		\item Se crea la clase Soldado.
+		\item Se crea la clase principal:
+	\end{itemize}	
+---------------------------------------------------------
+	      \begin{lstlisting}[language=bash,caption={Creando la clase Soldado}][H]
+			
+		public class Soldado {
+			/*
+	 laboratorio Nro 3 ejercicio 2
+	 Autor :Mikhail Gabino Velasque Arcos
+	colaboro:---
+	tiempo:
+	 */
+		    private String nombre;
+		    private int nivelVida;
+
+		    public Soldado(String nombre, int nivelVida) {
+		        this.nombre = nombre;
+		        this.nivelVida = nivelVida;
+		    }
+
+		    public String getNombre() {
+		        return nombre;
+		    }
+
+		    public int getNivelVida() {
+		        return nivelVida;
+		    }
+
+		    public void setNivelVida(int nivelVida) {
+		        this.nivelVida = nivelVida;
+		    }
+
+		    public String toString() {
+		        return "Soldado:" + nombre + " con vidad de  " + nivelVida;
+		    }
+
+	}
+	\end{lstlisting}	
+	\end{lstlisting}	   
+------------------------------------------------------------	
+	\begin{lstlisting}[language=bash,caption={Creando la clase PRINCIPPAL_soldados}][H]
+	public class PRINCIPAL_soldados {
+
+
+		/*
+		 clase principal del ejercicio 05 del lab 1  aplicando arreglo de objetos
+		 */
+		 /*
+	 laboratorio Nro 3 ejercicio 2
+	 Autor :Mikhail Gabino Velasque Arcos
+	colaboro:---
+	tiempo:
+	 */
+		public static void main(String[] args) {
+	        Scanner entrada = new Scanner(System.in);
+	        Soldado[] soldados = new Soldado[5];
+
+	        for (int i = 0; i < soldados.length; i++) {
+	            System.out.println("Soldado " + (i + 1));
+	            System.out.print("Nombre: ");
+	            String nombre = entrada.next();
+	            System.out.print("Nivel de Vida: ");
+	            int nivelVida = entrada.nextInt();
+
+	            soldados[i] = new Soldado(nombre, nivelVida);
+	        }
+
+	        System.out.println("\nLOS SOLDADOS CREADOS SON");
+	        for (Soldado soldado : soldados) {
+	            System.out.println(soldado);
+	        }
+	    }
+	
+	
+}
 	\end{lstlisting}
 
+
+\subsection{EJERCICIO 03 (Uso de arreglos de objetos en el ejercicio 5 del lab 01)}
+	\begin{itemize}	
+		\item Se usa la clase Soldado que ya s etenia anteriormente.
+		\item Se crea la clase principal EJERCITO_VS:
+	\end{itemize}
+	
+	\begin{lstlisting}[language=bash,caption={Creando la clase soldado}][H]
+	public class Soldado {
+    private String nombre;
+
+    public Soldado(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+}
+	
+	
+				\end{lstlisting}
+			
+			\begin{lstlisting}[language=bash,caption={Creando la clase Ejercito_vs}][H]
+	import java.util.*;
+public class Ejercito_vs {
+
+	public static void main(String[] args) {
+		 Soldado[] ejercito1 = inicioPROGRA();
+	        Soldado[] ejercito2 = inicioPROGRA();
+
+	        System.out.println("Ejército 1:");
+	        mostrar_Ejercito(ejercito1);
+
+	        System.out.println("\nEjército 2:");
+	        mostrar_Ejercito(ejercito2);
+
+	        int cantidad_ejercito1 = ejercito1.length;
+	        int cantidad_ejercito2 = ejercito2.length;
+
+	        if (cantidad_ejercito1 > cantidad_ejercito2) {
+	            System.out.println("\nEl Ejército 1 gana");
+	        } else if (cantidad_ejercito2 > cantidad_ejercito1) {
+	            System.out.println("\nEl Ejército 2 gana");
+	        } else {
+	            System.out.println("\nEmpate");
+	        }
+	    }
+
+	    public static Soldado[] inicioPROGRA() {
+	        Random r = new Random();
+	        int cantidadSoldados = r.nextInt(5) + 1;
+	        Soldado[] ejercito = new Soldado[cantidadSoldados];
+
+	        for (int i = 0; i < cantidadSoldados; i++) {
+	            ejercito[i] = new Soldado("Soldado" + i);
+	        }
+
+	        return ejercito;
+	    }
+	    public static void mostrar_Ejercito(Soldado[] ejercito) {
+	        for (int i = 0; i < ejercito.length; i++) {
+	            System.out.println("Soldado " + (i + 1) );
+	        }
+	    }
+	
+	}
+	
+	
+				\end{lstlisting}
 			
 \end{document}

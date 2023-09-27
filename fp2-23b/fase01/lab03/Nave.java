@@ -1,4 +1,10 @@
 public class Nave{
+	/*
+	 laboratorio Nro 3 ejercicio 1
+	 Autor :Mikhail Gabino Velasque Arcos
+	colaboro:---
+	tiempo:
+	 */
 	private String nombre;
 	private int fila;
 	private String columna;

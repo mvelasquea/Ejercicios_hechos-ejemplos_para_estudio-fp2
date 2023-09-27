@@ -1,4 +1,10 @@
 public class DemoBatalla {
+	/*
+	 laboratorio Nro 3 ejercicio 1
+	 Autor :Mikhail Gabino Velasque Arcos
+	colaboro:---
+	tiempo:
+	 */
 	public static void main(String [] args){
 		Nave [] misNaves = new Nave[10];
 		Scanner sc = new Scanner(System.in);
