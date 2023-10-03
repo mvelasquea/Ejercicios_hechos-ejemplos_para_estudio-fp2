@@ -1,8 +1,18 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
-public class VideoJuegoo_v2 {
-	 public static void main(String[] args) {
+public class VideoJuego_v2 {
+	
+	/*
+		 Reusando el codigo de los anterioes labs
+		
+			 laboratorio Nro 5 ejercicio 2
+			 //clase videojuedo_v2
+			 Autor :Mikhail Gabino Velasque Arcos
+			colaboro:---
+			tiempo:
+			 */
+	public static void main(String[] args) {
 	        int filas = 10; 
 	        int columnas = 10; 
 	        int cantidad = new Random().nextInt(10) + 1;

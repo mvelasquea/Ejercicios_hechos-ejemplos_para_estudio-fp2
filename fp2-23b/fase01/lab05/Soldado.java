@@ -1,5 +1,4 @@
-
-public class soldado {
+public class Soldado {
 		/*
 		 Reusando el codiogo de los anterioes labs
 		
@@ -9,32 +8,47 @@ public class soldado {
 			colaboro:---
 			tiempo:
 			 */
-			private String nombre;
-			private int fila;
-			private String columna;
-			private int puntos;
-			public void setNombre( String n){
-			nombre = n;
-			}
-			public void setFila(int f){
-			fila = f;
-			}
-			public void setColumna(String c){
-			columna = c;
-			}
-			public void setPuntos(int p){
-			puntos = p;
-			}
-			public String getNombre(){
-			return nombre;
+	   private String nombre;
+	    private int puntosDeVida;
+	    private int fila;
+	    private int columna;
+
+	    public Soldado(String nombre, int puntosDeVida) {
+	        this.nombre = nombre;
+	        this.puntosDeVida = puntosDeVida;
+	    }
+
+	    public String getNombre() {
+	        return nombre;
+	    }
+
+	    public int getPuntosDeVida() {
+	        return puntosDeVida;
+	    }
+
+	    public void setPuntosDeVida(int puntosDeVida) {
+	        this.puntosDeVida = puntosDeVida;
+	    }
+
+	    public int getFila() {
+	        return fila;
+	    }
+
+	    public void setFila(int fila) {
+	        this.fila = fila;
+	    }
+
+	    public int getColumna() {
+	        return columna;
+	    }
+
+	    public void setColumna(int columna) {
+	        this.columna = columna;
+	    }
+
+	    @Override
+	    public String toString() {
+	        return "Nombre: " + nombre + ", Vida: " + puntosDeVida + ", Fila: " + fila + ", Columna: " + columna;
+	    }
 	}
-			public int getFila(){
-			return fila;
-	}
-			public String getColumna(){
-			return columna;
-			}
-			public int getPuntos(){
-			return puntos;
-			}}
-	
+
