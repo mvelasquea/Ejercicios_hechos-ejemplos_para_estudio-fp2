@@ -1,12 +1,12 @@
 import java.util.*;
 public class VideoJuego_v4 {
 	/*
-	 Reusando el codiogo de los anterioes labs
+	 Reusando el codigo de los anterioes labs
 	
-		 laboratorio Nro 6 ejercicio 2
-		 //clase soldado
+		 laboratorio Nro 7 ejercicio 1 
+		 //clase PRINCIPAL
 		 Autor :Mikhail Gabino Velasque Arcos
-		colaboro:---
+		colaboro:---	
 		tiempo:
 		 */
 
@@ -97,19 +97,12 @@ public class VideoJuego_v4 {
 	        }
 
 	        System.out.println("\nRanking de poder:");
-	        ordenarSoldadosPorPoder(ejercito);
+	        ordenarSoldadosPorInsercion(ejercito);
+	        ordenarSoldadosPorBurbuja(ejercito);
+	        
 	        for (Soldado soldado : ejercito) {
 	            System.out.println(soldado);
 	        }
-	    }
-
-	    public static void ordenarSoldadosPorPoder(ArrayList<Soldado> ejercito) {
-	        Collections.sort(ejercito, new Comparator<Soldado>() {     
-	            public int compare(Soldado s1, Soldado s2) {
-	                return s2.getPuntosDeVida() - s1.getPuntosDeVida();
-	            }
-	        }
-	        );
 	    }
 	    public static String determinarGanador(ArrayList<Soldado> ejercito1, ArrayList<Soldado> ejercito2) {
 	        int totalVidaEjercito1 = calcularTotalVida(ejercito1);
@@ -127,5 +120,30 @@ public class VideoJuego_v4 {
 	            totalVida += soldado.getPuntosDeVida();
 	        }
 	        return totalVida;
+	    }
+	    public static void ordenarSoldadosPorInsercion(ArrayList<Soldado> ejercito) {
+	        int n = ejercito.size();
+	        for (int i = 1; i < n; i++) {
+	            Soldado actual = ejercito.get(i);
+	            int j = i - 1;
+
+	            while (j >= 0 && ejercito.get(j).getPuntosDeVida() < actual.getPuntosDeVida()) {
+	                ejercito.set(j + 1, ejercito.get(j));
+	                j--;
+	            }
+	            ejercito.set(j + 1, actual);
+	        }
+	    }
+	    public static void ordenarSoldadosPorBurbuja(ArrayList<Soldado> ejercito) {
+	        int n = ejercito.size();
+	        for (int i = 0; i < n - 1; i++) {
+	            for (int j = 0; j < n - i - 1; j++) {
+	                if (ejercito.get(j).getPuntosDeVida() < ejercito.get(j + 1).getPuntosDeVida()) {
+	                    Soldado temp = ejercito.get(j);
+	                    ejercito.set(j, ejercito.get(j + 1));
+	                    ejercito.set(j + 1, temp);
+	                }
+	            }
+	        }
 	    }
 	}
