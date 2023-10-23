@@ -1,22 +1,13 @@
 import java.util.*;
+import java.util.stream.Collectors;
 public class VideoJuego_v5 {
-	/*
-	 Reusando el codigo de los anterioes labs
-	clase principal
+public static void main(String args[]) {
 
-		 laboratorio Nro 8 ejercicio 1 
-		 //clase PRINCIPAL
-		 Autor :Mikhail Gabino Velasque Arcos
-		colaboro:---	
-		tiempo:
-		 */
-
-	 public static void main(String[] args) {
-	        int filas = 10; 
-	        int columnas = 10; 
-	        int n = new Random().nextInt(10) + 1; 
-	        ArrayList<Soldado> ejercito1 = crearEjercito(n, filas, columnas, "E1");
-	        ArrayList<Soldado> ejercito2 = crearEjercito(n, filas, columnas, "E2");
+	        int filas = 10;
+	        int columnas = 10;
+	        int n = new Random().nextInt(10) + 1;
+	        HashMap<String, Soldado> ejercito1 = crearEjercito(n, filas, columnas, "E1");
+	        HashMap<String, Soldado> ejercito2 = crearEjercito(n, filas, columnas, "E2");
 
 	        mostrarTablero(filas, columnas, ejercito1, ejercito2);
 
@@ -30,82 +21,65 @@ public class VideoJuego_v5 {
 	        System.out.println("\nEl ejército ganador es: " + ganador);
 	    }
 
-	    public static ArrayList<Soldado> crearEjercito(int n, int filas, int columnas, String ejercitoPrefix) {
-	        ArrayList<Soldado> ejercito = new ArrayList<>();
+	    public static HashMap<String, Soldado> crearEjercito(int n, int filas, int columnas, String ejercitoPrefix) {
+	        HashMap<String, Soldado> ejercito = new HashMap<>();
 	        Random rand = new Random();
 	        for (int i = 1; i <= n; i++) {
-	            String nombre = ejercitoPrefix + "-" + i; 
-	            int puntosDeVida = rand.nextInt(5) + 1; 
+	            String nombre = ejercitoPrefix + "-" + i;
+	            int puntosDeVida = rand.nextInt(5) + 1;
 
-	            int fila, columna;
+	            String posicion;
 	            do {
-	                fila = rand.nextInt(filas) + 1;
-	                columna = rand.nextInt(columnas) + 1;
-	            } while (yaOcupada(fila, columna, ejercito));
+	                int fila = rand.nextInt(filas) + 1;
+	                int columna = rand.nextInt(columnas) + 1;
+	                posicion = fila + "-" + columna;
+	            } while (ejercito.containsKey(posicion));
 	            Soldado soldado = new Soldado(nombre, puntosDeVida);
-	            soldado.setFila(fila);
-	            soldado.setColumna(columna);
-	            ejercito.add(soldado);
+	            ejercito.put(posicion, soldado);
 	        }
 	        return ejercito;
 	    }
 
-	    public static boolean yaOcupada(int fila, int columna, ArrayList<Soldado> ejercito) {
-	        for (Soldado soldado : ejercito) {
-	            if (soldado.getFila() == fila && soldado.getColumna() == columna) {
-	                return true;
-	            }}
-	        return false;
-	    }
-	    public static void mostrarTablero(int filas, int columnas, ArrayList<Soldado> ejercito1, ArrayList<Soldado> ejercito2) {
+	    public static void mostrarTablero(int filas, int columnas, HashMap<String, Soldado> ejercito1, HashMap<String, Soldado> ejercito2) {
 	        for (int fila = 1; fila <= filas; fila++) {
-	            for (int columna = 1; columna <= columnas; columna++) { 
-	                Soldado soldado1 = encontrarSoldadoEnPosicion(fila, columna, ejercito1);
-	                Soldado soldado2 = encontrarSoldadoEnPosicion(fila, columna, ejercito2);
+	            for (int columna = 1; columna <= columnas; columna++) {
+	                String posicion = fila + "-" + columna;
+	                Soldado soldado1 = ejercito1.get(posicion);
+	                Soldado soldado2 = ejercito2.get(posicion);
 	                if (soldado1 != null) {
 	                    System.out.print("|" + soldado1.getNombre() + "|");
 	                } else if (soldado2 != null) {
 	                    System.out.print("|" + soldado2.getNombre() + "|");
 	                } else {
 	                    System.out.print("|____|");
-	                }}
-	            System.out.println(); 
-	        }}
-	    public static Soldado encontrarSoldadoEnPosicion(int fila, int columna, ArrayList<Soldado> ejercito) {
-	        for (Soldado soldado : ejercito) {
-	            if (soldado.getFila() == fila && soldado.getColumna() == columna) {
-	                return soldado;
-	            }}
-	        return null;
-	    }
-	    public static void mostrarEstadisticas(ArrayList<Soldado> ejercito) {
-	        int totalVida = 0;
-	        Soldado maxVida = ejercito.get(0);
-
-	        for (Soldado soldado : ejercito) {
-	            totalVida += soldado.getPuntosDeVida();
-	            if (soldado.getPuntosDeVida() > maxVida.getPuntosDeVida()) {
-	                maxVida = soldado;
+	                }
 	            }
+	            System.out.println();
 	        }
+	    }
 
-	        System.out.println("Puntos de vida promedio: " + (double) totalVida / ejercito.size());
+	    public static void mostrarEstadisticas(HashMap<String, Soldado> ejercito) {
+	        List<Soldado> soldados = new ArrayList<>(ejercito.values());
+	        int totalVida = soldados.stream().mapToInt(Soldado::getPuntosDeVida).sum();
+	        Soldado maxVida = soldados.stream().max(Comparator.comparing(Soldado::getPuntosDeVida)).orElse(null);
+
+	        System.out.println("Puntos de vida promedio: " + (double) totalVida / soldados.size());
 	        System.out.println("Soldado con mayor vida: " + maxVida);
 
 	        System.out.println("\nLista de Soldados:");
-	        for (Soldado soldado : ejercito) {
-	            System.out.println(soldado);
-	        }
+	        soldados.forEach(System.out::println);
 
 	        System.out.println("\nRanking de poder:");
-	        ordenarSoldadosPorInsercion(ejercito);
-	        ordenarSoldadosPorBurbuja(ejercito);
-	        
-	        for (Soldado soldado : ejercito) {
-	            System.out.println(soldado);
-	        }
+	        ordenarSoldadosPorPuntosDeVida(soldados);
+
+	        soldados.forEach(System.out::println);
 	    }
-	    public static String determinarGanador(ArrayList<Soldado> ejercito1, ArrayList<Soldado> ejercito2) {
+
+	    public static void ordenarSoldadosPorPuntosDeVida(List<Soldado> soldados) {
+	        soldados.sort(Comparator.comparing(Soldado::getPuntosDeVida).reversed());
+	    }
+
+	    public static String determinarGanador(HashMap<String, Soldado> ejercito1, HashMap<String, Soldado> ejercito2) {
 	        int totalVidaEjercito1 = calcularTotalVida(ejercito1);
 	        int totalVidaEjercito2 = calcularTotalVida(ejercito2);
 	        if (totalVidaEjercito1 > totalVidaEjercito2) {
@@ -114,37 +88,11 @@ public class VideoJuego_v5 {
 	            return "Ejército 2 (E2)";
 	        } else {
 	            return "Empate";
-	        }}
-	    public static int calcularTotalVida(ArrayList<Soldado> ejercito) {
-	        int totalVida = 0;
-	        for (Soldado soldado : ejercito) {
-	            totalVida += soldado.getPuntosDeVida();
 	        }
-	        return totalVida;
 	    }
-	    public static void ordenarSoldadosPorInsercion(ArrayList<Soldado> ejercito) {
-	        int n = ejercito.size();
-	        for (int i = 1; i < n; i++) {
-	            Soldado actual = ejercito.get(i);
-	            int j = i - 1;
 
-	            while (j >= 0 && ejercito.get(j).getPuntosDeVida() < actual.getPuntosDeVida()) {
-	                ejercito.set(j + 1, ejercito.get(j));
-	                j--;
-	            }
-	            ejercito.set(j + 1, actual);
-	        }
-	    }
-	    public static void ordenarSoldadosPorBurbuja(ArrayList<Soldado> ejercito) {
-	        int n = ejercito.size();
-	        for (int i = 0; i < n - 1; i++) {
-	            for (int j = 0; j < n - i - 1; j++) {
-	                if (ejercito.get(j).getPuntosDeVida() < ejercito.get(j + 1).getPuntosDeVida()) {
-	                    Soldado temp = ejercito.get(j);
-	                    ejercito.set(j, ejercito.get(j + 1));
-	                    ejercito.set(j + 1, temp);
-	                }
-	            }
-	        }
+	    public static int calcularTotalVida(HashMap<String, Soldado> ejercito) {
+	        return ejercito.values().stream().mapToInt(Soldado::getPuntosDeVida).sum();
 	    }
 	}
+
