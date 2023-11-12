@@ -3,6 +3,15 @@ import java.util.stream.Collectors;
 public class VideoJuego_v5 {
 public static void main(String args[]) {
 
+/*
+	 Reusando el codiogo de los anterioes labs
+	
+		 laboratorio Nro 8 ejercicio 1
+		 //clase principal usando hasmap
+		 Autor :Mikhail Gabino Velasque Arcos
+		colaboro:---
+		tiempo:
+		 */
 	        int filas = 10;
 	        int columnas = 10;
 	        int n = new Random().nextInt(10) + 1;
