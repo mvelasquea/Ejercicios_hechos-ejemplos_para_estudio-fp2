@@ -1,1 +1,47 @@
-estilos del trabajo html
+*{
+	font-family: Arial, sans-serif;
+    margin: 15;
+    padding: 15 ;   
+}
+p,
+h1{
+	color: white;
+	font-size: 25 px;
+	text-align: center;
+}
+h2{
+color: black;
+	font-size: 45px;
+	text-align: left;
+
+
+}
+header {
+
+    display: flex;
+    justify-content: left;
+    height: 100px; 
+  background-color: #7f052a; 
+    padding: 0 250px;
+}
+	
+label {
+	font-size: 25px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+input[type="submit"] {
+    padding: 10px;
+    background-color: darkred;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+  select{
+  	background-color: whitesmoke;
+
+
+  }
