@@ -1,1 +1,2 @@
-creando el directorio para ignorar
+Soldado.class
+VideoJuego_v1_lab12.class
