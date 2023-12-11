@@ -2,8 +2,7 @@
 public class Soldado {
 		/*
 		 Reusando el codiogo de los anterioes labs
-		
-			 laboratorio Nro 12 ejercicio 1
+		 laboratorio Nro 12 ejercicio 1
 			 //clase soldado
 			 Autor :Mikhail Gabino Velasque Arcos
 			colaboro:---
