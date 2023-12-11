@@ -1,4 +1,4 @@
-package src;
+
 public class Soldado {
 		/*
 		 Reusando el codiogo de los anterioes labs
