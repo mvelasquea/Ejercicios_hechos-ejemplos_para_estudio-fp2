@@ -1,5 +1,3 @@
-package problemas_ejercicio22_diciembre;
-
 import java.util.*;
 public class Ejercito{
 	/*

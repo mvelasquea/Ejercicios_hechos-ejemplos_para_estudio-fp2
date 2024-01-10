@@ -1,6 +1,5 @@
 
 import java.util.*;
-
 public class Videojuego{
 	/*
 	Ejercicio lab 20 
