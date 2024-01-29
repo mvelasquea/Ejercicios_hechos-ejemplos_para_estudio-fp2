@@ -3,7 +3,6 @@ public class EspadachinTeutonico extends Espadachin implements UnidadEspecial{
     private int nivelEvolucion = 1; 
     public EspadachinTeutonico(String nombre, int fila, int columna, int reino){
         super(nombre, fila, columna, reino);
-        //se les modifica el nombre aqui
 		setVidaActual(13);
     }
     public String impresionTabla(){
@@ -28,3 +27,4 @@ public class EspadachinTeutonico extends Espadachin implements UnidadEspecial{
         }
     }
 }
+

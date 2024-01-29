@@ -15,9 +15,6 @@ public abstract class Soldado{
 		this.columna = c; 
 		this.reino = reino;
 	}
-
-	public Soldado(){}
-
 	public void atacar(){
 		avanzar();
 	}

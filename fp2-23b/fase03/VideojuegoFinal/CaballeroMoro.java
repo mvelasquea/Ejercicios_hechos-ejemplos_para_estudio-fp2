@@ -8,7 +8,6 @@ public class CaballeroMoro extends Caballero implements UnidadEspecial{
     public String impresionTabla(){
         return "CM"+this.getVidaActual();
     }
-
     public void lanzar(){
         if(flechas > 0){
             atacar();
@@ -38,3 +37,4 @@ public class CaballeroMoro extends Caballero implements UnidadEspecial{
         }
     }
 }
+

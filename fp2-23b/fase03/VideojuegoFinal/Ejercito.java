@@ -1,4 +1,5 @@
 import java.util.*;
+import javax.swing.JOptionPane;
 public class Ejercito{
 	private ArrayList<Soldado> ejercito = new ArrayList<Soldado>();
 	private int reino;
@@ -67,7 +68,6 @@ public class Ejercito{
 		reino = r;
 	}
 
-	//metodos para realizar el juego
 	private static Soldado encontrarSoldado(Ejercito e, int fila, int columna){
 		for(Soldado s: e.getSoldados()){
 			if(s.getFila() == fila && s.getColumna() == columna){
@@ -77,25 +77,17 @@ public class Ejercito{
 		return null;
 	}
 
-	public static boolean validar(Ejercito amigo, Ejercito enemigo, int x, int y, int tox, int toy){
-		if ((x < 0 || x > 9) || (y < 0 || y > 9)){
-			System.out.println("Limites del mapa excedidos");
-			return true;
-		}
-        if ((tox < 0 || tox > 9) || (toy < 0 || toy > 9)){
-			System.out.println("Limites del mapa excedidos");
-			return true;
-		}		
+	public static boolean validar(Ejercito amigo, Ejercito enemigo, int x, int y, int tox, int toy){	
 		if(encontrarSoldado(enemigo, x, y) != null){
-			System.out.println("Ha seleccionado a un enemigo!. Ingrese de nuevo");
+			JOptionPane.showMessageDialog(null, "Ha seleccionado a un enemigo!. Ingrese de nuevo");
 			return true;
 		}
 		if(encontrarSoldado(amigo, tox, toy) != null){
-			System.out.println("Se encontro a un aliado en esa direccion!. Ingrese de nuevo");
+			JOptionPane.showMessageDialog(null, "Se encontro a un aliado en esa direccion!. Ingrese de nuevo");
 			return true;
 		}
 		if(encontrarSoldado(amigo, x, y) == null){
-			System.out.println("No hay ningun soldado aliado en esa seleccion!. Ingrese de nuevo");
+			JOptionPane.showMessageDialog(null, "No hay ningun soldado aliado en esa seleccion!. Ingrese de nuevo");
 			return true;
 		}
 		return false;
@@ -111,12 +103,9 @@ public class Ejercito{
 		} else {
 			realizarBatalla(mover, noMover, solEleccion, solEnemigo,tox,toy);
 		}
-		
-		
 	}
 	
 	private static void realizarBatalla(Ejercito mover, Ejercito noMover, Soldado soldadoEleccion, Soldado soldadoEnemigo, int tox, int toy) {
-			System.out.println("BATALLA!!!!");
 			boolean resultado = batalla(soldadoEleccion, soldadoEnemigo, soldadoEleccion.getNombre(), soldadoEnemigo.getNombre());
 			if (resultado) {
 				noMover.getSoldados().remove(soldadoEnemigo);
@@ -126,7 +115,6 @@ public class Ejercito{
 			} else {
 				mover.getSoldados().remove(soldadoEleccion);
 				soldadoEnemigo.setVidaActual(soldadoEnemigo.getVidaActual() + 1);
-
 			}
 	}
 	
@@ -199,26 +187,32 @@ public class Ejercito{
 		double probabilidadPerder = 1.0 - probabilidadGanar;
 		double resultadoAleatorio = Math.random();
 	
-		System.out.println(nombre1 + ": " + vida1 + "\t\t" +  nombre2 +": " + vida2);
-		System.out.println("Probabilidades de victoria:");
-		System.out.println(nombre1+": " + (probabilidadGanar * 100) + "%\t" + nombre2 +": " + (probabilidadPerder * 100) + "%");
-	
+		String mensaje = "<html><body>" +
+        "<h2>BATALLA!!!!</h2>" +
+        "<p>" + nombre1 + ": " + vida1 + "&emsp;" + nombre2 + ": " + vida2 + "</p>" +
+        "<p><strong>Probabilidades de victoria:</strong></p>" +
+        "<p>" + nombre1 + ": " + String.format("%.2f", probabilidadGanar * 100) + "%&emsp;" +
+        nombre2 + ": " + String.format("%.2f", probabilidadPerder * 100) + "%</p>" +
+        "</body></html>";
+
+		JOptionPane.showMessageDialog(null, mensaje);
+
 		if (resultadoAleatorio < probabilidadGanar) {
-			System.out.println(nombre1 + " gana la batalla");
+			JOptionPane.showMessageDialog(null, nombre1 + " gana la batalla");
 			return true;
 		} else {
-			System.out.println(nombre2 + " gana la batalla");
+			JOptionPane.showMessageDialog(null, nombre2 + " gana la batalla");
 			return false;
 		}
 	}
 
 	public static boolean winner(Ejercito e1, Ejercito e2){
 		if(e2.getSoldados().size() == 0){
-			System.out.println("¡¡¡VICTORIA DEL EJERCITO 1!!!");
+			JOptionPane.showMessageDialog(null, "¡¡¡VICTORIA DEL EJERCITO 1!!!");
 			return false;
 		}
 		if(e1.getSoldados().size() == 0){
-			System.out.println("¡¡¡VICTORIA DEL EJERCITO 2!!!");
+			JOptionPane.showMessageDialog(null, "¡¡¡VICTORIA DEL EJERCITO 2!!!");
 			return false;
 		}
 		return true;

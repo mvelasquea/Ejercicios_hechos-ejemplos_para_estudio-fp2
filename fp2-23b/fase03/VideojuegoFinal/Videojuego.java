@@ -1,76 +1,61 @@
-import java.util.*;
+import java.awt.Window;
+
+import javax.swing.JOptionPane;
 public class Videojuego{
+	//probando
 	public static void main(String[] args){
-		Scanner sc = new Scanner(System.in);
-		String end = "";
+		int option;
 		do{
 			Mapa terreno = new Mapa();
-			terreno.genTablero();
-			terreno.imprimirDatosTerreno();
-			terreno.imprimirMapa();
-			terreno.imprimirDatosFinales();
-			terreno.imprimirDatosTerreno();
-			juego(terreno);
-			System.out.println("Desea salir?");
-			end = sc.next();
-		}while (!end.equals("si"));
+			Tablero tabla = new Tablero(terreno.getEjercito1(), terreno.getEjercito2());
+			terreno.imprimirDatosFinales();// imprime otra ventana de datos fiinales
+			juego(terreno, tabla);
+            option = JOptionPane.showConfirmDialog(null, "¿Desea salir?", "Salir", JOptionPane.YES_NO_OPTION);
+
+			Window[] windows = Window.getWindows();
+			for (Window window : windows) {
+				window.dispose();
+			}
+
+		}while (option == JOptionPane.NO_OPTION);
+	
+        System.exit(0);
 	}
-	public static void juego(Mapa terreno){
-		Scanner scanner = new Scanner(System.in);
-		char in;
+	public static void juego(Mapa terreno, Tablero tabla){
 		Ejercito e1 = terreno.getEjercito1();
 		Ejercito e2 = terreno.getEjercito2();
 		int turno = 0;
-		System.out.println("¡Bienvenido al videojuego!");
-		terreno.imprimirMapa();
+		JOptionPane.showMessageDialog(null, "Bienvenido al simulador");
+		tabla.repintarTablero();
 		do{
 			if(turno%2==0){
-				System.out.println("\u001B[32m" + "Turno del reino 1 (#) "+ "\u001B[0m");
-				//Comprobar los indices
 				int x=0, y=0, tox=0, toy=0;
 				do{
-					System.out.println("Ingrese los valores del soldado que desea mover");
-					System.out.print("Ingrese la fila: ");
-					x = scanner.nextInt();
-					System.out.print("Ingrese la columna: ");
-					in = scanner.next().charAt(0);
-					y = Character.compare(in, 'A') + 1;
-
-					System.out.println("Ingrese los valores del destino");
-					System.out.print("Ingrese la fila: ");
-					tox = scanner.nextInt();
-					System.out.print("Ingrese la columna: ");
-					in = scanner.next().charAt(0);
-					toy = Character.compare(in, 'A') + 1;
+					JOptionPane.showMessageDialog(null, "Turno del reino Azul");
+					int arr[] = tabla.getCoordenadas();
+					x = arr[0];
+					y = arr[1];
+					int toarr[] = tabla.getCoordenadas();
+					tox = toarr[0];
+					toy = toarr[1];
 					x--;y--;tox--;toy--;
 				}while(Ejercito.validar(e1, e2, x,y,tox,toy));
 				Ejercito.mover(e1, e2, x,y,tox, toy);
 			}else{
-				System.out.println("\u001B[31m" +"Turno del reino 2 (*) " + "\u001B[0m");
 				int x=0, y=0, tox=0, toy=0;
 				do{
-					System.out.println("Ingrese los valores del soldado que desea mover");
-					System.out.print("Ingrese la fila: ");
-					x = scanner.nextInt();
-					System.out.print("Ingrese la columna: ");
-					in = scanner.next().charAt(0);
-					y = Character.compare(in, 'A') + 1;
-
-					System.out.println("Ingrese los valores del destino");
-					System.out.print("Ingrese la fila: ");
-					tox = scanner.nextInt();
-					System.out.print("Ingrese la columna: ");
-					in = scanner.next().charAt(0);
-					toy = Character.compare(in, 'A') + 1;					
+					JOptionPane.showMessageDialog(null, "Turno del reino Rojo");
+					int arr[] = tabla.getCoordenadas();
+					x = arr[0];
+					y = arr[1];
+					int toarr[] = tabla.getCoordenadas();
+					tox = toarr[0];
+					toy = toarr[1];		
 					x--;y--;tox--;toy--;
-				}while(Ejercito.validar(e2, e1, x,y,tox,toy));
+				}while(Ejercito.validar(e2, e1, x,y,tox,toy));//metodo que se encuentra en  ejercito
 				Ejercito.mover(e2, e1, x,y,tox, toy);
 			}
-			terreno.genTablero();
-			terreno.imprimirMapa();
-
-			System.out.println("\u001B[32m"+e1 +"\u001B[0m");
-			System.out.println("\u001B[31m"+e2 +"\u001B[0m");
+			tabla.repintarTablero();
 			turno++;
 		}while(Ejercito.winner(e1, e2));
 	}
